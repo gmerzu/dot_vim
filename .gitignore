@@ -1,7 +1,8 @@
 /bundle
-/sessions
-.DS_Store
 
 /.netrwhist
-/spell
-/vundle_plugins/custom
+/.viminfo
+/.yankring_history_*.txt
+
+/tags
+/*.py[oc]

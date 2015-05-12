@@ -1,48 +1,53 @@
 " ----------------------------------------
-" Auto Commands
+" AUTO COMMANDS
 " ----------------------------------------
 
-if has("autocmd")
-  augroup MyAutoCommands
-    " Clear the auto command group so we don't define it multiple times
-    " Idea from http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
-    autocmd!
-    " No formatting on o key newlines
-    autocmd BufNewFile,BufEnter * set formatoptions-=o
+augroup MyAutoCommands
+	" Clear the auto command group so we don't define it multiple times
+	" Idea from http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+	autocmd!
 
-    " No more complaining about untitled documents
-    autocmd FocusLost silent! :wa
+	" No formatting on o key newlines
+	autocmd BufNewFile,BufEnter * set formatoptions-=o
 
-    " When editing a file, always jump to the last cursor position.
-    " This must be after the uncompress commands.
-    autocmd BufReadPost *
-          \ if line("'\"") > 1 && line ("'\"") <= line("$") |
-          \   exe "normal! g`\"" |
-          \ endif
+	" No more complaining about untitled documents
+	autocmd FocusLost silent! wall
 
-    " Fix trailing whitespace in my most used programming langauges
-    autocmd BufWritePre *.py,*.coffee,*.rb,*.erb,*.md,*.scss,*.vim,Cakefile,
-          \*.hbs
-          \ silent! :StripTrailingWhiteSpace
+	" Resize splits when the window is resized
+	" from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+	autocmd VimResized * wincmd =
 
-    " Help mode bindings
-    " <enter> to follow tag, <bs> to go back, and q to quit.
-    " From http://ctoomey.com/posts/an-incremental-approach-to-vim/
-    autocmd filetype help nnoremap <buffer><cr> <c-]>
-    autocmd filetype help nnoremap <buffer><bs> <c-T>
-    autocmd filetype help nnoremap <buffer>q :q<CR>
+	" Highlight current line only in active window
+	autocmd WinEnter * setlocal cursorline
+	autocmd WinLeave * setlocal nocursorline
 
-    " Fix accidental indentation in html files
-    " from http://morearty.com/blog/2013/01/22/fixing-vims-indenting-of-html-files.html
-    autocmd FileType html setlocal indentkeys-=*<Return>
+	" Automatically close preview window when not needed anymore
+	autocmd InsertLeave * call AutoClosePreviewWindow()
+	autocmd CursorMovedI * call AutoClosePreviewWindow()
 
-    " Leave the return key alone when in command line windows, since it's used
-    " to run commands there.
-    autocmd! CmdwinEnter * :unmap <cr>
-    autocmd! CmdwinLeave * :call MapCR()
+	" Set tab space to 4 for python files
+	autocmd Filetype python setlocal tabstop=4 shiftwidth=4
 
-    " Resize splits when the window is resized
-    " from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
-    au VimResized * :wincmd =
-  augroup END
-endif
+	" Set tab space to 2 and expandtab for ruby files
+	autocmd Filetype ruby,eruby setlocal tabstop=2 shiftwidth=2 expandtab
+
+	" Set tab space to 2 and expandtab for cucumber files
+	autocmd Filetype cucumber setlocal tabstop=2 shiftwidth=2 expandtab
+
+	autocmd BufRead,BufNewFile *.html,*.htm,*.xml set matchpairs+=<:>
+
+	" Enable spelling for some files
+	autocmd BufRead,BufNewFile,BufWrite *.txt,*.tex,*.latex setlocal spell
+	autocmd BufRead,BufNewFile,BufWrite ~/.vim/bundle/*/doc/*,/usr/share/vim/*/doc/*,~/.vim/doc/* setlocal nospell
+
+	" autocmd Filetype *
+	"	\if &omnifunc == "" |
+	"	\setlocal omnifunc=syntaxcomplete#Complete |
+	"	\endif
+
+	" Exit from insert mode after inactive ...
+	" autocmd cursorholdi * stopinsert
+	" ... for 100 seconds
+	" autocmd InsertEnter * let updaterestore=&updatetime | set updatetime=100000
+	" autocmd InsertLeave * let &updatetime=updaterestore
+augroup END

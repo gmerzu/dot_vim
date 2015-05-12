@@ -1,11 +1,11 @@
 " ----------------------------------------
-" Mappings
+" MAPPINGS
 " ----------------------------------------
 
-" Set leader to ,
+" Set leader to \
 " Note: This line MUST come before any <leader> mappings
-let mapleader=","
-let maplocalleader = "\\"
+let mapleader='\'
+let maplocalleader = '\'
 
 " ---------------
 " Regular Mappings
@@ -21,7 +21,7 @@ nnoremap gy :%y+<cr>
 " Select entire buffer
 nnoremap vy ggVG
 
-" Make Y behave like other capital commands.
+" Make Y behave like other capital commands
 " Hat-tip http://vimbits.com/bits/11
 nnoremap Y y$
 
@@ -43,6 +43,37 @@ nnoremap U <C-r>
 nnoremap ' `
 nnoremap ` '
 
+" Ctrl-C to copy to the X-clipboard
+vnoremap <C-C> "+y
+
+" Backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" For when you forget to sudo.. Really Write the file
+cnoremap w!! w !sudo tee % >/dev/null
+
+" Ctrl-T to aspell check file in the current buffer
+nnoremap <C-T> :write!<CR>:!aspell check %<CR>:edit! %<CR>
+
+" Toggle list set
+nnoremap <F5> :call ToggleList()<CR>
+" Toggle number set
+nnoremap <F6> :call ToggleNumber()<CR>
+" Toggle mouse
+nnoremap <F7> :call ToggleMouse()<CR>
+" Change encoding
+nnoremap <F8> :call GenEncMenu()<CR>:emenu Encoding.<Tab>
+" Translate word
+" map <F10> :call TranslateWord()<CR>
+
 " ---------------
 " Window Movement
 " ---------------
@@ -59,7 +90,7 @@ nnoremap <silent> gl :WriteBufferIfNecessary<CR>:wincmd l<CR>
 nnoremap <silent> g1 :WriteBufferIfNecessary<CR>:wincmd t<CR>
 nnoremap <silent> g2 :WriteBufferIfNecessary<CR>:wincmd t<bar>:wincmd l<CR>
 nnoremap <silent> g3 :WriteBufferIfNecessary<CR>:wincmd t<bar>:wincmd l<bar>
-      \:wincmd l<CR>
+	\:wincmd l<CR>
 nnoremap <silent> g4 :WriteBufferIfNecessary<CR>:wincmd b<CR>
 
 " Previous Window
@@ -73,7 +104,7 @@ nnoremap <silent> gx :wincmd x<CR>
 " Modifer Mappings
 " ---------------
 
-" Make line completion easier.
+" Make line completion easier
 inoremap <C-l> <C-x><C-l>
 
 " Easier Scrolling (think j/k with left hand)
@@ -89,7 +120,7 @@ vnoremap <C-k> 15gkzz
 " Insert Mode Mappings
 " ---------------
 
-" Let's make escape better, together.
+" Let's make escape better, together
 inoremap jk <Esc>
 inoremap JK <Esc>
 inoremap Jk <Esc>
@@ -100,7 +131,10 @@ inoremap jK <Esc>
 " ---------------
 
 " Clear search
-noremap <silent><leader>/ :nohls<CR>
+" noremap <silent><leader>/ :nohlsearch<CR>
+" Toggle search highlight
+" noremap <silent><leader>/ :if &hlsearch \| set nohlsearch \| else \| set hlsearch \| endif<CR>
+nnoremap <silent> <leader>/ :set invhlsearch<CR>
 
 " Highlight search word under cursor without jumping to next
 nnoremap <leader>h *<C-O>
@@ -141,6 +175,19 @@ nnoremap <silent> <leader>vs :vsplit<Bar>:wincmd l<CR>
 
 " Close the current window
 nnoremap <silent> <leader>sc :close<CR>
+
+" Code folding switch hot-keys
+nnoremap <silent> <leader>f0 :set foldlevel=0<CR>
+nnoremap <silent> <leader>f1 :set foldlevel=1<CR>
+nnoremap <silent> <leader>f2 :set foldlevel=2<CR>
+nnoremap <silent> <leader>f3 :set foldlevel=3<CR>
+nnoremap <silent> <leader>f4 :set foldlevel=4<CR>
+nnoremap <silent> <leader>f5 :set foldlevel=5<CR>
+nnoremap <silent> <leader>f6 :set foldlevel=6<CR>
+nnoremap <silent> <leader>f7 :set foldlevel=7<CR>
+nnoremap <silent> <leader>f8 :set foldlevel=8<CR>
+nnoremap <silent> <leader>f9 :set foldlevel=9<CR>
+
 " ---------------
 " Typo Fixes
 " ---------------
@@ -153,7 +200,10 @@ cnoremap w' w<CR>
 " make Q repeat the last macro instead. *hat tip* http://vimbits.com/bits/263
 nnoremap Q @@
 
-" Removes doc lookup mapping because it's easy to fat finger and never useful.
+" Don't use Ex mode, use Q for formatting
+" map Q gq
+
+" Removes doc lookup mapping because it's easy to fat finger and never useful
 nnoremap K k
 vnoremap K k
 
@@ -162,19 +212,3 @@ nnoremap <silent> <F5> :set paste!<CR>
 
 " Insert date
 iabbrev ddate <C-R>=strftime("%Y-%m-%d")<CR>
-
-" copy current file name (relative/absolute) to system clipboard
-" from http://stackoverflow.com/a/17096082/22423
-if has("mac") || has("gui_macvim") || has("gui_mac")
-  " relative path  (src/foo.txt)
-  nnoremap <silent> <leader>yp :let @*=expand("%")<CR>
-
-  " absolute path  (/something/src/foo.txt)
-  nnoremap <silent> <leader>yP :let @*=expand("%:p")<CR>
-
-  " filename       (foo.txt)
-  nnoremap <silent> <leader>yf :let @*=expand("%:t")<CR>
-
-  " directory name (/something/src)
-  nnoremap <silent> <leader>yd :let @*=expand("%:p:h")<CR>
-endif
