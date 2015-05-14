@@ -2,8 +2,8 @@
 " (needs xdotool, markdown, see)
 
 if exists('g:vundle_installing_plugins')
-	" Plugin 'JamshedVesuna/vim-markdown-preview'
-	Plugin 'gmerzu/vim-markdown-preview'
+	Plugin 'JamshedVesuna/vim-markdown-preview'
+	" Plugin 'gmerzu/vim-markdown-preview'
 	finish
 endif
 
