@@ -122,7 +122,7 @@ ask()
 wait_for_pid()
 {
 	local pid=$1
-	local timeout=20
+	local timeout=2000
 	local msgs=("I'm still here ..." "Need couple of time ..." "You can drink a cup of tee :)")
 	local msgs_count=${#msgs[*]}
 	local step=0
@@ -288,16 +288,16 @@ install_vundle()
 
 install_plugins()
 {
-	info "Installing plugins ..."
+	info "Installing plugins [time: $(date +"%H:%M:%S")] ..."
 	info "----------------------"
 	do_action "pushd ~/.vim &>/dev/null" || fail "Can't pushd into ~/.vim"
 	warn "Please wait a while ..."
 	(do_action vim -X -T xterm --noplugin -n -i /tmp/viminfo-vundle-$(gen_random).tmp \
 		-u vundle_install.vim -U NONE \"+PluginInstall!\" \"+PluginClean!\" \"+qall!\" "&>/dev/null" \
 		|| fail "Can't install plugins") &
-	wait_for_pid $! || fail "There were some errors while installing plugins"
+	wait_for_pid $! || fail "There were some errors while installing plugins [time: $(date +"%H:%M:%S")]"
 	do_action "popd &>/dev/null"
-	info "Done."
+	info "Done [time: $(date +"%H:%M:%S")]."
 }
 
 finish()
