@@ -34,6 +34,9 @@ augroup MyAutoCommands
 	" Set tab space to 2 and expandtab for cucumber files
 	autocmd Filetype cucumber setlocal tabstop=2 shiftwidth=2 expandtab
 
+	" Set noexpandtab for C/C++ files
+	autocmd Filetype c,cpp setlocal noexpandtab
+
 	autocmd BufRead,BufNewFile *.html,*.htm,*.xml set matchpairs+=<:>
 
 	" Enable spelling for some files

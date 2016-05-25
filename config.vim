@@ -7,7 +7,7 @@
 " ---------------
 " set background=light
 set background=dark
-" colorscheme jellybeans
+colorscheme desert
 " Force 256 color mode
 if !has('gui_running')
 	set t_Co=256

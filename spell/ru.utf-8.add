@@ -4,3 +4,4 @@ config
 plugin
 Kozhemyachenko
 sublicense
+namespace
