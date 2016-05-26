@@ -196,3 +196,8 @@ set mouse=""                     " No mouse at all
 set mousemodel=popup             " Right mouse button pops up a menu in the GUI
 
 set complete=.,w,b,u,U           " Better complete options to speed it up
+
+" Source a local configuration file if available
+if filereadable(expand("~/.vimrc.local"))
+	source ~/.vimrc.local
+endif
