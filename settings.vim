@@ -11,6 +11,7 @@ let g:settings = {}
 let g:settings.plugin_groups_exclude = ['dev']
 " let g:settings.plugins = []
 let g:settings.plugins_exclude = []
+let g:settings.plugins_exclude += ['misc/colorv']
 " let g:settings.plugins_exclude += ['dev/YouCompleteMe']
 let g:settings.plugins_exclude += ['editor/AutoClose']
 " let g:settings.plugins_exclude += ['libs/vimproc']
