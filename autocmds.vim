@@ -30,7 +30,10 @@ augroup MyAutoCommands
 
 	" Set tab space to 2 and expandtab for ruby files
 	autocmd Filetype ruby,eruby setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd Filetype coffee setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
 
 	" Set tab space to 2 and expandtab for cucumber files
 	autocmd Filetype cucumber setlocal tabstop=2 shiftwidth=2 expandtab
