@@ -5,4 +5,4 @@ if exists('g:vundle_installing_plugins')
 	finish
 endif
 
-let g:togglecursor_leave = 'line'
+let g:togglecursor_leave = 'blinking_block'

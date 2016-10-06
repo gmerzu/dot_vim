@@ -24,6 +24,7 @@ let g:settings.plugin_depends['general/vim-session'] = ['libs/vim-misc']
 let g:settings.plugin_depends['navigation/FuzzyFinder'] = ['libs/L9']
 let g:settings.plugin_depends['navigation/clipbrd'] = ['libs/genutils']
 let g:settings.plugin_depends['dev/vim-easytags'] = ['libs/vim-misc']
+let g:settings.plugin_depends['ui/vim-airline-themes'] = ['ui/vim-airline']
 
 " optional dependencies
 let g:settings.plugin_depends['navigation/vim-easymotion'] = ['libs/vimproc']

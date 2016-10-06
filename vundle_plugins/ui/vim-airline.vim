@@ -1,14 +1,10 @@
 " Lean & mean status/tabline for vim that's light as air
 
 if exists('g:vundle_installing_plugins')
-	Plugin 'bling/vim-airline'
+	Plugin 'vim-airline/vim-airline'
 	finish
 endif
 
-" let g:airline_theme = 'dark'
-" let g:airline_theme = 'serene'
-" let g:airline_theme = 'luna'
-let g:airline_theme = 'ubaryd'
 let g:airline_powerline_fonts = 1
 let g:airline_detect_modified = 1
 let g:airline#extensions#whitespace#enabled = 0
