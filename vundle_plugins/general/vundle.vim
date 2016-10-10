@@ -10,6 +10,6 @@ function! PluginReloadAndRun(command)
 	execute a:command
 endfunction
 
-nnoremap <leader>pi :call PluginReloadAndRun('PluginInstall')<CR>
-nnoremap <leader>pu :call PluginReloadAndRun('PluginInstall!')<CR>
-nnoremap <leader>pc :call PluginReloadAndRun('PluginClean')<CR>
+" nnoremap <leader>pi :call PluginReloadAndRun('PluginInstall')<CR>
+" nnoremap <leader>pu :call PluginReloadAndRun('PluginInstall!')<CR>
+" nnoremap <leader>pc :call PluginReloadAndRun('PluginClean')<CR>
