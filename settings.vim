@@ -18,6 +18,7 @@ let g:settings.plugins_exclude += ['dev/c']
 let g:settings.plugins_exclude += ['misc/tmuxline', 'misc/vimux', 'misc/vimtux']
 let g:settings.plugins_exclude += ['editor/AutoClose']
 let g:settings.plugins_exclude += ['dev/fuckpep8']
+let g:settings.plugins_exclude += ['dev/vim-easytags']
 " let g:settings.plugins_exclude += ['libs/vimproc']
 let g:settings.plugin_groups_order = ['libs']
 
