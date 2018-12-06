@@ -26,6 +26,14 @@ if has_key(g:settings, 'plugin_groups_exclude') && !empty(g:settings.plugin_grou
 		endif
 	endfor
 endif
+let s:plugins = {}
+if has_key(g:settings, 'plugins') && !empty(g:settings.plugins)
+	for plugin in g:settings.plugins
+		if filereadable(expand('~/.vim/vundle_plugins/' . plugin . '.vim'))
+			let s:plugins[plugin] = 1
+		endif
+	endfor
+endif
 function! s:GroupsCompare(g1, g2)
 	if has_key(g:settings, 'plugin_groups_order') && !empty(g:settings.plugin_groups_order)
 		let i1 = index(g:settings.plugin_groups_order, a:g1)
@@ -42,8 +50,15 @@ function! s:GroupsCompare(g1, g2)
 		return 0
 	endif
 endfunction
+function! s:PlusinsCompare(p1, p2)
+	let g1 = split(a:p1, '/')[0]
+	let g2 = split(a:p2, '/')[0]
+	return s:GroupsCompare(g1, g2)
+endfunction
 let s:sortedgroups = sort(keys(s:groups), 's:GroupsCompare')
 let g:settings.loaded_groups = s:sortedgroups[:]
+let s:sortedplugins = sort(keys(s:plugins), 's:PluginsCompare')
+let g:settings.loaded_plugins = s:sortedplugins[:]
 let s:loaded_plugins = {}
 
 " Functions to load plugins regarding its dependencies
@@ -57,9 +72,6 @@ function! s:LoadPlugin(p)
 endfunction
 function! s:GatherPluginRecursively(p, deps)
 	if index(a:deps, a:p) != -1
-		return
-	endif
-	if has_key(g:settings, 'plugins') && index(g:settings.plugins, a:p) == -1
 		return
 	endif
 	if has_key(g:settings, 'plugins_exclude') && index(g:settings.plugins_exclude, a:p) != -1
@@ -94,6 +106,9 @@ for group in s:sortedgroups
 		let plugin = fnamemodify(fnameescape(file), ":t:r")
 		call s:LoadPluginRecursively(group . '/' . plugin)
 	endfor
+endfor
+for plugin in s:sortedplugins
+	call s:LoadPluginRecursively(plugin)
 endfor
 unlet g:vundle_installing_plugins
 

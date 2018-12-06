@@ -6,20 +6,15 @@
 let g:settings = {}
 
 " Plugin groups settings
+let g:settings.plugin_groups = ['general', 'navigation', 'ui']
+let g:settings.plugin_groups += ['editor', 'syntax']
 " let g:settings.plugin_groups = ['dummy']
-" let g:settings.plugin_groups = ['general', 'navigation', 'ui']
 let g:settings.plugin_groups_exclude = []
 " let g:settings.plugin_groups_exclude += ['dev']
-" let g:settings.plugins = []
+let g:settings.plugins = []
+let g:settings.plugins += ['misc/scratch-utility']
 let g:settings.plugins_exclude = []
-let g:settings.plugins_exclude += ['misc/colorv']
-" let g:settings.plugins_exclude += ['dev/YouCompleteMe']
-let g:settings.plugins_exclude += ['dev/c']
-let g:settings.plugins_exclude += ['misc/tmuxline', 'misc/vimux', 'misc/vimtux']
 let g:settings.plugins_exclude += ['editor/AutoClose']
-let g:settings.plugins_exclude += ['dev/fuckpep8']
-let g:settings.plugins_exclude += ['dev/vim-easytags']
-" let g:settings.plugins_exclude += ['libs/vimproc']
 let g:settings.plugin_groups_order = ['libs']
 
 let g:settings.plugin_depends = {}
